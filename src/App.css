@@ -1,3 +1,5 @@
+/* App.css */
+
 body {
   background: radial-gradient(circle, rgba(0, 0, 0, 0) 10%, #000 25%);
   margin: 0;
@@ -11,7 +13,7 @@ body {
   margin: auto;
   border-radius: 50%;
   overflow: hidden; /* Clip content outside the circle */
-  background-color: #fff; /* Set the background color to white */
+  background-color: #feffd8; /* Set the background color to white */
 }
 
 .mask {
@@ -22,17 +24,15 @@ body {
   height: 100%;
   background: radial-gradient(
     circle,
-    transparent 0%, /* Fully transparent at the center (0%) */
-    transparent 60%,
-    #000 80%, /* Black color at the outer edge (100%) */
-    #000 110% /* Black color at the outer edge (100%) */
-
+    transparent 0%,
+    /* Fully transparent at the center (0%) */ transparent 60%,
+    #000 80%,
+    /* Black color at the outer edge (100%) */ #000 110%
+      /* Black color at the outer edge (100%) */
   );
   border-radius: 50%;
   opacity: 1;
 }
-
-
 
 .bacterium {
   /* Add your styling for the bacterium */

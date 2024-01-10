@@ -1,42 +1,66 @@
+// Bacterium.js
 import React, { Component } from "react";
-import { getRandomColors } from "./utilityFunctions";
+import {
+  getRandomColors,
+  getRandomIntInRange,
+  getStartingPosition,
+  plusMinus,
+} from "./utilityFunctions";
 
 class Bacterium extends Component {
   constructor(props) {
     super(props);
-    const xMin = window.innerWidth * 0.25; // Adjust the percentage as needed
-    const xMax = window.innerWidth * 0.75; // Adjust the percentage as needed
-    const yMin = window.innerHeight * 0.25; // Adjust the percentage as needed
-    const yMax = window.innerHeight * 0.75; // Adjust the percentage as needed
+    const [x, y] = getStartingPosition(window);
+    console.log(`starting at: `, x, y);
+    console.log(`window.innerWidth:`, window.innerWidth);
+    console.log(`window.innerHeight:`, window.innerHeight);
     this.state = {
-      x: Math.random() * window.innerWidth,
-      y: Math.random() * window.innerHeight,
+      x,
+      y,
       colors: getRandomColors(),
-      speed: Math.random() * 2 + 1,
+      speed: Math.random() * 5 + 1,
     };
   }
 
   componentDidMount() {
-    this.moveInterval = setInterval(this.moveBacterium, 800); // Adjust the interval as needed
+    this.moveInterval = setInterval(this.moveBacterium, 3000); // Adjust the interval as needed
   }
 
   componentWillUnmount() {
     clearInterval(this.moveInterval);
   }
+
   getNewPosition() {
     const { x, y } = this.state;
-    const xMin = window.innerWidth * 0.25; // Adjust the percentage as needed
-    const xMax = window.innerWidth * 0.75; // Adjust the percentage as needed
+    const xMin = window.innerHeight * 0.25; // Adjust the percentage as needed
+    const xMax = window.innerHeight * 0.75; // Adjust the percentage as needed
     const yMin = window.innerHeight * 0.25; // Adjust the percentage as needed
     const yMax = window.innerHeight * 0.75; // Adjust the percentage as needed
 
-    const newX = x + (Math.random() - 0.5) * this.state.speed;
-    const newY = y + (Math.random() - 0.5) * this.state.speed;
+    const newX = x + plusMinus(Math.random() * this.state.speed);
+    const newY = y + plusMinus(Math.random() * this.state.speed);
 
-    return [
-      Math.round(Math.min(Math.max(newX, xMin), xMax)), // Random x position within bounds
-      Math.round(Math.min(Math.max(newY, yMin), yMax)), // Random y position within bounds
-    ];
+    // Calculate the distance from the center of the circular area
+    const xDist = newX - window.innerHeight / 2;
+    const yDist = newY - window.innerHeight / 2;
+    const distance = Math.sqrt(xDist * xDist + yDist * yDist);
+    console.log(`newX`, newX);
+    console.log(`newY`, newY);
+
+    console.log(`dist:`, distance, `max:`, window.innerHeight * 0.45);
+
+    // If the distance is within the radius of the circular area, use the new position
+    if (distance < window.innerHeight * 0.45) {
+      return [
+        Math.round(Math.min(Math.max(newX, xMin), xMax)),
+        Math.round(Math.min(Math.max(newY, yMin), yMax)),
+      ];
+    } else {
+      // If outside the circular area, recalculate the position
+      console.log(`🔴`);
+
+      return this.getNewPosition();
+    }
   }
 
   moveBacterium = () => {
@@ -45,7 +69,6 @@ class Bacterium extends Component {
       return {
         x,
         y,
-        // colors: this.getRandomColors(),
       };
     });
   };

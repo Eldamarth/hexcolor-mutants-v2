@@ -41,4 +41,5 @@ body {
   height: 20px; /* Adjust the height as needed */
   background-color: #ff0000; /* Initial background color */
   border-radius: 50%; /* Ensures a circular shape */
+  transition: top 1s linear, left 1s linear; /* Standard */
 }

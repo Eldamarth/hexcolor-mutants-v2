@@ -8,8 +8,8 @@ body {
 
 .microscope {
   position: relative;
-  width: 80vmin;
-  height: 80vmin;
+  width: 100vmin;
+  height: 100vmin;
   margin: auto;
   border-radius: 50%;
   overflow: hidden; /* Clip content outside the circle */

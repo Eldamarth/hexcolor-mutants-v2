@@ -5,7 +5,7 @@ import {
   getRandomIntInRange,
   getStartingPosition,
   plusMinus,
-} from "./utilityFunctions";
+} from "../logic/utilityFunctions";
 
 class Bacterium extends Component {
   constructor(props) {

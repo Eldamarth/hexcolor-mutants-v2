@@ -1,8 +1,24 @@
 // utilityFunctions.js
 
+export function randInt(max) {
+  return Math.floor(Math.random() * max) + 1;
+}
+export function randHex() {
+  return randInt(16).toString(16);
+}
+
+export function randHexKey(x = 32) {
+  let out = "";
+  for (let i = 0; i < x; i++) {
+    out += randHex();
+  }
+  return out;
+}
+
 export function getRandomColor() {
   return Math.floor(Math.random() * 256);
 }
+
 export function getRandomColors() {
   return [
     `rgb(${getRandomColor()}, ${getRandomColor()}, ${getRandomColor()})`,
@@ -19,7 +35,7 @@ export function getRandomIntInRange(min, max) {
     max
   );
   let diff = max - min;
-  return Math.floor(min + Math.random() * diff);
+  return Math.round(min + randInt(diff));
 }
 
 export function getStartingPosition(window) {

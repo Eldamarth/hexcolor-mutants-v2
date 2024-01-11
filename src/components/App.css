@@ -13,11 +13,11 @@ body {
 
 .microscope {
   position: relative;
-  /* width: var(--height); */
-  /* height: var(--height); */
+  width: var(--height);
+  height: var(--height);
 
-  width: 80vh;
-  height: 80vh;
+  /* width: 80vh;
+  height: 80vh; */
   margin: auto;
   border-radius: 50%;
   overflow: hidden; /* Clip content outside the circle */
@@ -39,6 +39,7 @@ body {
   );
   border-radius: 50%;
   opacity: 1;
+  z-index: 6;
 }
 
 .bacterium {

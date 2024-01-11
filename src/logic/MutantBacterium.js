@@ -94,7 +94,7 @@ export default class MutantBacterium {
       let output = "" + hexCode;
 
       if (randInt(20) === 20) {
-        let mutantDigit = randInt(6);
+        let mutantDigit = randInt(6) - 1;
         let hexArr = output.split("");
         hexArr[mutantDigit] = randHex();
         output = hexArr.join("");

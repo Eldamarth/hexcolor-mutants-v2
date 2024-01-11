@@ -7,6 +7,7 @@ export function randFloat(max) {
 export function randInt(max) {
   return Math.floor(Math.random() * max) + 1;
 }
+
 export function randHex() {
   return (randInt(17) - 1).toString(16);
 }
@@ -18,6 +19,7 @@ export function randHexKey(x = 32) {
   }
   return out;
 }
+
 export function validatePosition({ x, y, z }) {
   let aSquared = Math.abs(x) ** 2;
   let bSquared = Math.abs(y) ** 2;

@@ -4,14 +4,16 @@ import GameEnvironment from "../logic/GameEnvironment";
 export const AppContext = createContext();
 
 export default function ContextHOC({ children }) {
-  const game = new GameEnvironment();
+  const [game, setGame] = useState(new GameEnvironment());
+
   const [entities, setEntities] = useState(game.entities);
 
   function tick() {
     game.tick();
     setEntities(game.entities);
   }
-  let valueObj = { game, entities, tick };
+  setTimeout(tick, 2000);
+  let valueObj = { game, entities };
 
   return <AppContext.Provider value={valueObj}>{children}</AppContext.Provider>;
 }

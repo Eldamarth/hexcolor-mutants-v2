@@ -1,5 +1,9 @@
 // utilityFunctions.js
 
+export function randFloat(max) {
+  return (Math.random() * max).toFixed(2);
+}
+
 export function randInt(max) {
   return Math.floor(Math.random() * max) + 1;
 }
@@ -13,6 +17,19 @@ export function randHexKey(x = 32) {
     out += randHex();
   }
   return out;
+}
+export function validatePosition({ x, y, z }) {
+  let aSquared = Math.abs(x) ** 2;
+  let bSquared = Math.abs(y) ** 2;
+  let c = 50; // max radial distance from center of microscope
+
+  let pythangoreanCheck = Math.sqrt(aSquared + bSquared) < c;
+  let zCheck = z >= 0 && z <= 5;
+  return pythangoreanCheck && zCheck;
+}
+
+export function plusMinus(num) {
+  return Math.round(Math.random()) > 0 ? num : 0 - num;
 }
 
 export function getRandomColor() {
@@ -38,6 +55,17 @@ export function getRandomIntInRange(min, max) {
   return Math.round(min + randInt(diff));
 }
 
+export function getValidStartPosition() {
+  let x = plusMinus(randInt(51) - 1);
+  let y = plusMinus(randInt(51) - 1);
+  let z = randInt(6) - 1;
+  let possiblePosition = { x, y, z };
+  console.log(`Possible Position:`, possiblePosition);
+  return validatePosition(possiblePosition)
+    ? possiblePosition
+    : getValidStartPosition();
+}
+
 export function getStartingPosition(window) {
   const xMin = window.innerHeight * 0.25; // Adjust the percentage as needed
   const xMax = window.innerHeight * 0.75; // Adjust the percentage as needed
@@ -57,8 +85,4 @@ export function getStartingPosition(window) {
     console.log(`🔴`);
     return getStartingPosition(window);
   }
-}
-
-export function plusMinus(num) {
-  return Math.round(Math.random()) > 0 ? num : 0 - num;
 }

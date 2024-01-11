@@ -1,4 +1,4 @@
-export default function MutantNode({ hexColorCode, index }) {
+export default function BacteriumNode({ hexColorCode, index }) {
   let classStyles = [
     `top-left`,
     `top-center`,
@@ -10,7 +10,7 @@ export default function MutantNode({ hexColorCode, index }) {
   let classStyle = classStyles[index];
   return (
     <div
-      className={`mutant-node ${classStyle}`}
+      className={`bacterium-node ${classStyle}`}
       style={{
         borderTopColor: hexColorCode,
       }}

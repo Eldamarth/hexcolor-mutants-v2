@@ -1,14 +1,15 @@
 import { randHex, randInt, randHexKey } from "./utilityFunctions";
-import { shuffle } from "lodash";
+import { shuffle, uniqueId } from "lodash";
 import MutantBacterium from "./MutantBacterium";
 
 export default class GameEnvironment {
   constructor() {
     this.entityList = {};
     this.spawnProgenitor();
-    this.populationLimit = 100;
+    this.populationLimit = 50;
     this.population = 1;
     this.duration = 0;
+    this.mutationCount = 0;
   }
 
   get entities() {
@@ -21,11 +22,11 @@ export default class GameEnvironment {
 
   addEntity(entity) {
     this.population++;
+    entity.key = uniqueId(`entity-`);
     this.entityList[entity.key] = entity;
   }
 
   deleteEntity(key) {
-    // console.log(`deleting `, key);
     delete this.entityList[key];
     this.population--;
   }
@@ -36,14 +37,19 @@ export default class GameEnvironment {
     let progenitor = new MutantBacterium(this, {
       parent: "Carl Sagan",
       DNA: [hex, hex, hex, hex, hex, hex],
-      replicationRate: 5,
+      replicationChance: 2,
       maxAge: 30,
+      location: { x: 0, y: 0, z: 3 },
     });
     this.addEntity(progenitor);
   }
 
   incrementDuration() {
     this.duration++;
+  }
+
+  incrementMutationCount() {
+    this.mutationCount++;
   }
 
   triggerEvent() {

@@ -2,6 +2,7 @@
 
 :root {
   --height: 100vh;
+  --bacterium-size: 30px;
 }
 
 body {
@@ -12,8 +13,11 @@ body {
 
 .microscope {
   position: relative;
-  width: var(--height);
-  height: var(--height);
+  /* width: var(--height); */
+  /* height: var(--height); */
+
+  width: 80vh;
+  height: 80vh;
   margin: auto;
   border-radius: 50%;
   overflow: hidden; /* Clip content outside the circle */
@@ -26,15 +30,12 @@ body {
   left: 0;
   width: var(--height);
   height: var(--height);
-  /* min-height: 100vmin;
-  min-width: 100vmin; */
   background: radial-gradient(
     circle,
     transparent 0%,
-    /* Fully transparent at the center (0%) */ transparent 60%,
+    transparent 30%,
     #000 80%,
-    /* Black color at the outer edge (100%) */ #000 110%
-      /* Black color at the outer edge (100%) */
+    #000 100%
   );
   border-radius: 50%;
   opacity: 1;
@@ -42,15 +43,15 @@ body {
 
 .bacterium {
   /* Add your styling for the bacterium */
+  margin: 5px;
   position: absolute;
-  width: 20px; /* Adjust the width as needed */
-  height: 20px; /* Adjust the height as needed */
-  background-color: #ff0000; /* Initial background color */
+  width: var(--bacterium-size); /* Adjust the width as needed */
+  height: var(--bacterium-size); /* Adjust the height as needed */
   border-radius: 50%; /* Ensures a circular shape */
-  transition: top 1s linear, left 1s linear; /* Standard */
+  transition: all 2s linear; /* Standard */
 }
 
-.bacteria-body {
+.bacterium-body {
   position: relative;
   top: 24px;
   left: -8px;
@@ -60,7 +61,7 @@ body {
   border-width: 15px;
   border-radius: 20px;
 }
-.bacteria-node {
+.bacterium-node {
   position: absolute;
   width: 0;
   height: 0;
@@ -69,42 +70,42 @@ body {
   border-top: 10px solid;
   border-radius: 50%;
 }
-.bacteria-node.top-right {
+.bacterium-node.top-right {
   -moz-transform: translate(7px) rotate(60deg);
   -webkit-transform: translate(7px) rotate(60deg);
   -o-transform: translate(7px) rotate(60deg);
   -ms-transform: translate(7px) rotate(60deg);
   transform: translate(7px) rotate(60deg);
 }
-.bacteria-node.top-left {
+.bacterium-node.top-left {
   -moz-transform: translate(-7px) rotate(300deg);
   -webkit-transform: translate(-7px) rotate(300deg);
   -o-transform: translate(-7px) rotate(300deg);
   -ms-transform: translate(-7px) rotate(300deg);
   transform: translate(-7px) rotate(300deg);
 }
-.bacteria-node.top-center {
+.bacterium-node.top-center {
   -moz-transform: translate(0px, -4px);
   -webkit-transform: translate(0px, -4px);
   -o-transform: translate(0px, -4px);
   -ms-transform: translate(0px, -4px);
   transform: translate(0px, -4px);
 }
-.bacteria-node.bottom-left {
+.bacterium-node.bottom-left {
   -moz-transform: translate(-7px, 8px) rotate(240deg);
   -webkit-transform: translate(-7px, 8px) rotate(240deg);
   -o-transform: translate(-7px, 8px) rotate(240deg);
   -ms-transform: translate(-7px, 8px) rotate(240deg);
   transform: translate(-7px, 8px) rotate(240deg);
 }
-.bacteria-node.bottom-right {
+.bacterium-node.bottom-right {
   -moz-transform: translate(7px, 8px) rotate(120deg);
   -webkit-transform: translate(7px, 8px) rotate(120deg);
   -o-transform: translate(7px, 8px) rotate(120deg);
   -ms-transform: translate(7px, 8px) rotate(120deg);
   transform: translate(7px, 8px) rotate(120deg);
 }
-.bacteria-node.bottom-center {
+.bacterium-node.bottom-center {
   -moz-transform: translate(0px, 12px) rotate(180deg);
   -webkit-transform: translate(0px, 12px) rotate(180deg);
   -o-transform: translate(0px, 12px) rotate(180deg);

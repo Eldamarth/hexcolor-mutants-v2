@@ -1,11 +1,14 @@
+import { useContext } from "react";
 import Bacterium from "./Bacterium";
+import { AppContext } from "./ContextHOC";
 
 export default function Microscope(props) {
+  const { game, entities, tick } = useContext(AppContext);
+
   return (
     <div className="microscope">
-      <div className="mask"></div>
-      {[...Array(25)].map((_, index) => (
-        <Bacterium key={index} />
+      {entities.map((entity) => (
+        <Bacterium key={entity.key} entity={entity} />
       ))}
     </div>
   );

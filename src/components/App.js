@@ -1,21 +1,19 @@
 // App.js
 // ... (imports)
-import React from "react";
-import Bacterium from "./Bacterium";
 import "./App.css";
-
-import GameEnvironment from "../logic/GameEnvironment";
+import React, { useContext } from "react";
+import Bacterium from "./Bacterium";
 import Microscope from "./Microscope";
+import { AppContext } from "./ContextHOC";
 
-class App extends React.Component {
-  render() {
-    return <Microscope />;
-  }
+export default function App() {
+  const { game, entities, tick } = useContext(AppContext);
+  setTimeout(tick, 500);
+
+  return <Microscope />;
 }
 
 // ... (export statement)
-
-export default App;
 
 // import React from "react";
 // import "../components/App.css";

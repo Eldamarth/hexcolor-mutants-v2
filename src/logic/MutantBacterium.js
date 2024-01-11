@@ -1,10 +1,11 @@
 import { randHex, randInt, randHexKey } from "./utilityFunctions";
+import { uniqueId } from "lodash";
 
-export default class Bacterium {
+export default class MutantBacterium {
   constructor(game, bacteriaInputObj) {
-    let { DNA, parent, replicationRate, maxAge } = bacteriaInputObj;
+    let { DNA, parent = this, replicationRate, maxAge } = bacteriaInputObj;
     this.game = game;
-    this.key = randHexKey();
+    this.key = uniqueId(`bacteria-`);
     this.DNA = DNA;
     this.parent = parent;
     this.children = [];
@@ -45,7 +46,6 @@ export default class Bacterium {
         output = hexArr.join("");
         // console.log(`changed to: `, output);
       }
-
       return output;
     }
 
@@ -64,16 +64,20 @@ export default class Bacterium {
     let replicationRate =
       randInt(10) >= 9 ? 5 + randInt(5) : this.replicationRate;
     let maxAge = randInt(10) >= 9 ? 15 + randInt(15) : this.maxAge;
-    let newChild = new Bacterium(this.game, {
+    let newChild = new MutantBacterium(this.game, {
       parent: this,
       DNA: this.getTranscribedDNA(),
       replicationRate,
       maxAge,
     });
+
     this.addChild(newChild);
-    this.game.addBacterium(newChild);
+
+    this.game.addEntity(newChild);
+
     return newChild;
   }
+
   addChild(child) {
     this.children.push(child);
   }
